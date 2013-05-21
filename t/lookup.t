@@ -92,7 +92,7 @@ for (
 # ignore upper 32bit and avoid issues on 32bit perl
 my ($secs) = unpack xxxxN => $meta->{build_epoch};
 is(
-    localtime($secs), q[Tue Jun 18 15:02:01 2013],
+    gmtime($secs), q[Tue Jun 18 15:02:01 2013],
     "DB built time was Tue Jun 18 15:02:01 2013"
 );
 
