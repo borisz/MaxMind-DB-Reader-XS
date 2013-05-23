@@ -89,12 +89,9 @@ for (
     is( $meta->{ $_->[0] }, $_->[1], "\$meta->{$_->[0]} is $_->[1]" );
 }
 
-# ignore upper 32bit and avoid issues on 32bit perl
-my ($secs) = unpack xxxxN => $meta->{build_epoch};
-is(
-    gmtime($secs), q[Tue Jun 18 15:02:01 2013],
-    "DB built time was Tue Jun 18 15:02:01 2013"
-);
+my ( $upper32, $lower32 ) = unpack NN => $meta->{build_epoch};
+ok( $upper32 == 0,          "Upper 32 epoch bits are zero" );
+ok( $lower32 == 0x5183ef76, "Lower 32 epoch bits match" );
 
 is( $meta->{description}{en}, 'Test Database Tue Jun 18 15:02:01 2013', 'description match' );
 is( "@{$meta->{languages}}", 'en ja ru zh-CN', 'DB contains en ja ru zh-CN' );
