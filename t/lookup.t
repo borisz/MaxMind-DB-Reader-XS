@@ -73,10 +73,29 @@ my $ip_24_24_24_24 = {
     }
 };
 
+my $meta_hash = {
+    'ip_version'                  => 4,
+    'binary_format_minor_version' => 0,
+    'description'                 => { 'en' => 'Test Database' },
+    'build_epoch'                 => "\x00\x00\x00\x00\x51\x83\xef\x76",
+    'node_count'                  => 24,
+    'database_type'               => 'Test',
+    'languages'                   => [
+        'en',
+        'ja',
+        'ru',
+        'zh-CN'
+    ],
+    'record_size'                 => 28,
+    'binary_format_major_version' => 2
+};
+
 use FindBin qw/$Bin/;
 
 my $mmdb = MaxMind::DB::Reader::XS->open( "$Bin/data/v4-28.mmdb", 2 );
 my $meta = $mmdb->metadata;
+
+is_deeply( $meta, $meta_hash, "Metadata match" );
 
 for (
     [ 'ip_version'                  => 4, ],
