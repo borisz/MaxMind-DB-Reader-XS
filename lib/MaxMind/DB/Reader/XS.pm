@@ -8,7 +8,7 @@ use Moose;
 
 extends 'MaxMind::DB::Reader';
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 require XSLoader;
 XSLoader::load( 'MaxMind::DB::Reader::XS', $VERSION );
