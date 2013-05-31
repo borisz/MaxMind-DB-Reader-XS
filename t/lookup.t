@@ -76,14 +76,6 @@ my $ip_24_24_24_24 = {
 use FindBin qw/$Bin/;
 
 my $mmdb = MaxMind::DB::Reader::XS->open( "$Bin/data/v4-28.mmdb", 2 );
-
-is( MaxMind::DB::Reader::XS->lib_version, '0.2', "CAPI Version is 0.2" );
-is(
-    MaxMind::DB::Reader::XS->lib_version, '0.2',
-    "lib_version works as static member function"
-);
-is( $mmdb->lib_version, '0.2', "lib_version works as member function" );
-
 my $meta = $mmdb->metadata;
 
 for (
