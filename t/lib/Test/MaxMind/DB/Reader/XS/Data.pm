@@ -2,6 +2,11 @@ package Test::MaxMind::DB::Reader::XS::Data;
 
 our ( $ip_24_24_24_24, $meta_hash );
 
+my @values = (
+    0,  0.0, 1,      .1,  0.123, 10, 7.99, 999999999.9999999,
+    -1, -.1, -0.123, -10, -7.99, -999999999.9999999
+);
+
 $ip_24_24_24_24 = {
     'country' => {
         'iso_code' => 'US',
@@ -86,7 +91,11 @@ $ip_24_24_24_24 = {
             uint128_t =>
                 "\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff",
             boolean_t => 1,
-        }
+        },
+        tst => {
+            array_ieee754_float_t  => \@values,
+            array_ieee754_double_t => \@values,
+        },
     },
 };
 

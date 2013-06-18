@@ -18,7 +18,7 @@ my $meta_hash      = $Test::MaxMind::DB::Reader::XS::Data::meta_hash;
 
 my $MIN_CAPI_VERSION = 0.3;
 
-for my $ip_version (qw/ 4 /) {
+for my $ip_version (qw/ 6 /) {
     for my $record_size (qw/ 24 28 32 /) {
 
         my $file = "v${ip_version}-$record_size.mmdb";
@@ -79,7 +79,7 @@ for my $ip_version (qw/ 4 /) {
             'DB contains en ja ru zh-CN'
         );
 
-        my @ips = ('24.24.24.24');
+        my @ips = ( '24.24.24.24', '::24.24.24.24', '::ffff:24.24.24.24' );
 
         for my $ip (@ips) {
             my $result = $mmdb->lookup_by_ip($ip);
@@ -99,7 +99,13 @@ for my $ip_version (qw/ 4 /) {
 
         }
 
-        @ips = qw/ 88.88.88.88 127.0.0.1 24.24.23.255 24.24.25.0 /;
+        @ips = (
+            qw/ 88.88.88.88 127.0.0.1 24.24.23.255 24.24.25.0 /,
+            '2001:4860:b002::67', '2001:4860:b002::69', '::88.88.88.88',
+            '::127.0.0.1',        '::24.24.23.255',     '::24.24.25.0',
+            '::ffff:88.88.88.88', '::ffff:127.0.0.1',   '::ffff:24.24.23.255',
+            '::ffff:24.24.25.0'
+        );
 
         for my $ip (@ips) {
             my $result = $mmdb->lookup_by_ip($ip);
