@@ -92,11 +92,11 @@ for (
 # ignore upper 32bit and avoid issues on 32bit perl
 my ($secs) = unpack xxxxN => $meta->{build_epoch};
 is(
-    localtime($secs), q[Fri May  3 19:10:14 2013],
-    "DB built time was Fri May  3 19:10:14 2013"
+    localtime($secs), q[Tue Jun 18 15:02:01 2013],
+    "DB built time was Tue Jun 18 15:02:01 2013"
 );
 
-is( $meta->{description}{en}, 'Test Database', 'description match' );
+is( $meta->{description}{en}, 'Test Database Tue Jun 18 15:02:01 2013', 'description match' );
 is( "@{$meta->{languages}}", 'en ja ru zh-CN', 'DB contains en ja ru zh-CN' );
 
 my $result = $mmdb->lookup_by_ip('24.24.24.24');
