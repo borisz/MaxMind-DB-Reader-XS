@@ -16,6 +16,8 @@ use Test::MaxMind::DB::Reader::XS::Data;
 my $ip_24_24_24_24 = $Test::MaxMind::DB::Reader::XS::Data::ip_24_24_24_24;
 my $meta_hash      = $Test::MaxMind::DB::Reader::XS::Data::meta_hash;
 
+my $MIN_CAPI_VERSION = 0.3;
+
 for my $ip_version (qw/ 4 /) {
     for my $record_size (qw/ 24 28 32 /) {
 
@@ -23,16 +25,16 @@ for my $ip_version (qw/ 4 /) {
 
         my $mmdb = MaxMind::DB::Reader::XS->open( "$Bin/data/$file", 2 );
 
-        is(
-            MaxMind::DB::Reader::XS->lib_version, '0.2',
-            "CAPI Version is 0.2"
+        ok(
+            MaxMind::DB::Reader::XS->lib_version >= $MIN_CAPI_VERSION,
+            "CAPI Version is OK"
         );
-        is(
-            MaxMind::DB::Reader::XS->lib_version, '0.2',
+        ok(
+            MaxMind::DB::Reader::XS->lib_version >= $MIN_CAPI_VERSION,
             "lib_version works as static member function"
         );
-        is(
-            $mmdb->lib_version, '0.2',
+        ok(
+            $mmdb->lib_version >= $MIN_CAPI_VERSION,
             "lib_version works as member function"
         );
 
