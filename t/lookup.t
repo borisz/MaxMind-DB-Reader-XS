@@ -43,13 +43,8 @@ for my $ip_version (qw/ 4 /) {
         my $meta_clone      = dclone($meta);
         my $meta_hash_clone = dclone($meta_hash);
 
-<<<<<<< HEAD
-is( $meta->{description}{en}, 'Test Database Tue Jun 18 15:02:01 2013', 'description match' );
-is( "@{$meta->{languages}}", 'en ja ru zh-CN', 'DB contains en ja ru zh-CN' );
-=======
         $meta_hash_clone->{ip_version}  = $ip_version;
         $meta_hash_clone->{record_size} = $record_size;
->>>>>>> Add more lookup tests
 
         for (qw/ node_count database_type description build_epoch /) {
             delete $meta_clone->{$_};
